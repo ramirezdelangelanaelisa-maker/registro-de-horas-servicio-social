@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Servicio Social - Esc. Prim. "Prof. Francisco César Morales"</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F2E5C6;       /* Champagne Beige */
+            --card-bg: #FFFFFF;
+            --primary: #3B010B;        /* Deep Wine */
+            --maroon: #560B18;         /* Dark Maroon */
+            --secondary: #75162D;      /* Burgundy */
+            --sand: #F2D9A0;           /* Sand Gold */
+            --cream-soft: #FAF2DF;
+            --text: #3B010B;
+            --border-color: #E3CFA6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(59, 1, 11, 0.08);
+            border-top: 8px solid var(--primary);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            color: var(--primary);
+            margin: 0;
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--sand);
+        }
+
+        p.subtitle {
+            color: var(--secondary);
+            margin-top: 10px;
+            font-size: 0.98rem;
+            font-weight: 600;
+        }
+
+        .reloj-vivo {
+            background-color: var(--sand);
+            color: var(--primary);
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+            background: var(--cream-soft);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            align-items: end;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        select, input {
+            padding: 11px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background-color: #FFFFFF;
+            color: var(--text);
+            outline: none;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--secondary);
+        }
+
+        .btn-registrar {
+            background-color: var(--secondary);
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-registrar:hover {
+            background-color: var(--primary);
+        }
+
+        .btn-registrar:active {
+            transform: scale(0.98);
+        }
+
+        .acciones-tabla {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .acciones-tabla h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .botones-extra button {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        .btn-exportar {
+            background-color: var(--maroon);
+            color: #FFFFFF;
+        }
+
+        .btn-exportar:hover {
+            background-color: var(--secondary);
+        }
+
+        .btn-limpiar {
+            background-color: var(--sand);
+            color: var(--primary);
+        }
+
+        .btn-limpiar:hover {
+            background-color: #E5C886;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.93rem;
+        }
+
+        th {
+            background-color: var(--maroon);
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: var(--bg-color);
+        }
+
+        .hora-redondeada {
+            background-color: var(--cream-soft);
+            color: var(--secondary);
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: inline-block;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .badge-entrada {
+            background-color: #F6E4E9;
+            color: var(--secondary);
+        }
+
+        .badge-salida {
+            background-color: #F7EBC9;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Registro de Servicio Social</h1>
+        <p class="subtitle">Control de Entradas y Salidas — Esc. Prim. "Prof. Francisco César Morales"</p>
+        <div class="reloj-vivo" id="relojVivo">Cargando fecha y hora...</div>
+    </header>
+
+    <form id="formServicio">
+        <div class="form-group">
+            <label for="prestador">Nombre del Prestador de Servicio:</label>
+            <select id="prestador" required>
+                <option value="" disabled selected>-- Selecciona tu nombre --</option>
+                <option value="1. Mariana San Antonio Gómez">1. Mariana San Antonio Gómez</option>
+                <option value="2. Dana Michelle Domingo Hernández">2. Dana Michelle Domingo Hernández</option>
+                <option value="3. Jelsi Kimberly Velazquez Mateo">3. Jelsi Kimberly Velazquez Mateo</option>
+                <option value="4. Sherlyn Hernández Uraga">4. Sherlyn Hernández Uraga</option>
+                <option value="5. Leydi Yamileth Hernández Aragón">5. Leydi Yamileth Hernández Aragón</option>
+                <option value="6. Ana Elisa Ramírez Del Ángel">6. Ana Elisa Ramírez Del Ángel</option>
+                <option value="7. Jocelyn Esther Hernández Cisneros">7. Jocelyn Esther Hernández Cisneros</option>
+                <option value="8. Ricardo González Cruz">8. Ricardo González Cruz</option>
+                <option value="9. Cristian De Jesús Ontiveros Calva">9. Cristian De Jesús Ontiveros Calva</option>
+                <option value="10. Ángel Tadeo Ortega Escamilla">10. Ángel Tadeo Ortega Escamilla</option>
+                <option value="11. Fabricio Villegas Hernández">11. Fabricio Villegas Hernández</option>
+                <option value="12. Brandon Esdras Morales Hernández">12. Brandon Esdras Morales Hernández</option>
+                <option value="13. Alexander Hilario Bautista">13. Alexander Hilario Bautista</option>
+                <option value="14. Saul Castillo Ventura">14. Saul Castillo Ventura</option>
+                <option value="15. Yosmar Velazquez Chavero">15. Yosmar Velazquez Chavero</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="tipoMovimiento">Registro:</label>
+            <select id="tipoMovimiento" required>
+                <option value="Entrada">Entrada</option>
+                <option value="Salida">Salida</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-registrar">Guardar Registro</button>
+    </form>
+
+    <div class="acciones-tabla">
+        <h2>Historial de Asistencia</h2>
+        <div class="botones-extra">
+            <button type="button" class="btn-exportar" onclick="exportarCSV()">Descargar Excel (CSV)</button>
+            <button type="button" class="btn-limpiar" onclick="limpiarHistorial()">Borrar Todo</button>
+        </div>
+    </div>
+
+    <table id="tablaAsistencia">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora Exacta</th>
+                <th>Hora Redondeada</th>
+                <th>Nombre del Alumno</th>
+                <th>Movimiento</th>
+            </tr>
+        </thead>
+        <tbody id="cuerpoTabla">
+            <!-- Registros cargados automáticamente -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const form = document.getElementById('formServicio');
+    const cuerpoTabla = document.getElementById('cuerpoTabla');
+    const relojVivo = document.getElementById('relojVivo');
+
+    let registros = JSON.parse(localStorage.getItem('registrosServicioSocial')) || [];
+
+    function obtenerHoraRedondeada(fechaObj) {
+        let horas = fechaObj.getHours();
+        const minutos = fechaObj.getMinutes();
+
+        if (minutos >= 30) {
+            horas = (horas + 1) % 24;
+        }
+
+        const periodo = horas >= 12 ? 'p. m.' : 'a. m.';
+        const hora12 = horas % 12 === 0 ? 12 : horas % 12;
+
+        return `${hora12}:00 ${periodo}`;
+    }
+
+    function actualizarReloj() {
+        const ahora = new Date();
+        const fecha = ahora.toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        const hora = ahora.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        relojVivo.textContent = `📅 ${fecha}  |  🕒 ${hora}`;
+    }
+    setInterval(actualizarReloj, 1000);
+    actualizarReloj();
+
+    function renderizarTabla() {
+        cuerpoTabla.innerHTML = '';
+        registros.forEach(reg => {
+            const fila = document.createElement('tr');
+            const claseBadge = reg.movimiento === 'Entrada' ? 'badge-entrada' : 'badge-salida';
+
+            fila.innerHTML = `
+                <td>${reg.fecha}</td>
+                <td>${reg.hora}</td>
+                <td><span class="hora-redondeada">${reg.horaRedondeada || reg.hora}</span></td>
+                <td>${reg.nombre}</td>
+                <td><span class="badge ${claseBadge}">${reg.movimiento}</span></td>
+            `;
+            cuerpoTabla.appendChild(fila);
+        });
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nombre = document.getElementById('prestador').value;
+        const movimiento = document.getElementById('tipoMovimiento').value;
+
+        const ahora = new Date();
+        const fechaExacta = ahora.toLocaleDateString('es-MX', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+        const horaExacta = ahora.toLocaleTimeString('es-MX', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        const horaRedondeada = obtenerHoraRedondeada(ahora);
+
+        const nuevoRegistro = {
+            fecha: fechaExacta,
+            hora: horaExacta,
+            horaRedondeada: horaRedondeada,
+            nombre: nombre,
+            movimiento: movimiento
+        };
+
+        registros.unshift(nuevoRegistro);
+        localStorage.setItem('registrosServicioSocial', JSON.stringify(registros));
+
+        renderizarTabla();
+        form.reset();
+    });
+
+    function exportarCSV() {
+        if (registros.length === 0) {
+            alert('No hay registros para descargar todavía.');
+            return;
+        }
+
+        let csv = 'Fecha,Hora Exacta,Hora Redondeada,Nombre,Movimiento\n';
+        registros.forEach(r => {
+            csv += `"${r.fecha}","${r.hora}","${r.horaRedondeada || r.hora}","${r.nombre}","${r.movimiento}"\n`;
+        });
+
+        const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const enlace = document.createElement('a');
+        enlace.href = url;
+        enlace.download = 'Registro_Servicio_Social.csv';
+        enlace.click();
+    }
+
+    function limpiarHistorial() {
+        if (confirm('¿Seguro que deseas borrar todo el historial de entradas y salidas?')) {
+            registros = [];
+            localStorage.removeItem('registrosServicioSocial');
+            renderizarTabla();
+        }
+    }
+
+    renderizarTabla();
+</script>
+
+</body>
+</html>
